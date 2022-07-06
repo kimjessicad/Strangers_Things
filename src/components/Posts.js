@@ -3,11 +3,22 @@
 import React from "react";
 
 const Posts = (props) => {
-    return (
-        <div>
-            Hello World I Am Posts
-        </div>
-    )
-}
+  const posts = props.posts.data.posts;
+  console.log(posts)
+  return (
+    <div>
+      {posts.map((e)=>(
+          <div key={e.id} className="post">
+             <h2 className="postTitle">
+                 { e.title }
+             </h2>
+             <h3>{e.price}</h3>
+             <p>{e.description}</p>
+          </div>
+      )
+      )}
+    </div>
+  );
+};
 
 export default Posts;
