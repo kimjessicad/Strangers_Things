@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile } from "../api";
 import { Messages } from "../components"
+import { MyPosts } from "../components"
 
 const Profile = (props) => {
     let token = "";
@@ -18,7 +19,8 @@ const Profile = (props) => {
 
     return (
         <div>
-         I am a profile.  I am not implemented yet.
+         I am a profile.  I am not implemented yet.  Once they are built,
+         MyPosts and MyMessages will be represented here.
         </div>
     )
 }
