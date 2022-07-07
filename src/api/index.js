@@ -60,6 +60,42 @@ export async function login(event) {
         const token = result.data.token
         localStorage.setItem("token", token)
         const tokenFromStorage = localStorage.getItem("token")
+        return token; 
     }
     catch (error){ console.error(error)}
 }
+
+export async function getProfile(token) {
+    const response = await fetch (`${BASE_URL}/API/${COHORT_NAME}/users/me`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+    
+    const result = await response.json()
+    const data = result.data;
+    return data;
+}
+
+export async function createNewPost(postObj,token) {
+    const response = await fetch (`${BASE_URL}/API/${COHORT_NAME}/posts`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          post: {
+            title: postObj.title,
+            description: postObj.description,
+            price: postObj.price,
+            willDeliver: postObj.willDeliver
+          }
+        })
+      }) 
+      const result = await response.json()
+      console.log(result)  
+}
+

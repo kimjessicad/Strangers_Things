@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { fetchAllPosts } from "./api";
-import { Posts, Login, Register } from "./components";
+import { Posts, Login, Register, Profile, PostForm } from "./components";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -10,7 +10,7 @@ const App = () => {
   const fetchPosts = async () => {
     try {
       const result = await fetchAllPosts();
-      console.log(result,"inside fetchPosts")
+      console.log(result, "inside fetchPosts");
       setPosts(result);
     } catch (error) {
       console.error(error);
@@ -21,20 +21,18 @@ const App = () => {
     fetchPosts();
   }, []);
 
-  posts.data ? console.log(posts.data.posts) : null
+  posts.data ? console.log(posts.data.posts) : null;
 
   return (
     <div className="app">
-        <Register/>
-        <Login/>
+      {localStorage.getItem("token") ? <Profile /> : null}
 
-      { posts.data ?
-      <Posts posts={posts} />
-      :null}
+      <Register />
+      <Login />
 
-
-      </div>
-  
+      {posts.data ? <Posts posts={posts} /> : null}
+    <PostForm />
+    </div>
   );
 };
 
