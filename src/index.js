@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { fetchAllPosts } from "./api";
-import { Posts } from "./components";
+import { Posts, Login, Register } from "./components";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -22,10 +22,19 @@ const App = () => {
   }, []);
 
   posts.data ? console.log(posts.data.posts) : null
+
   return (
     <div className="app">
+        <Register/>
+        <Login/>
+
+      { posts.data ?
       <Posts posts={posts} />
-    </div>
+      :null}
+
+
+      </div>
+  
   );
 };
 

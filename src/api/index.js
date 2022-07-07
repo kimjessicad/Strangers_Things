@@ -1,8 +1,8 @@
 export const BASE_URL = "https://strangers-things.herokuapp.com";
 export const COHORT_NAME = "'2206-FTB-ET-WEB-FT'";
 
-export const fetchAllPosts = async ()=>{
-   
+export const fetchAllPosts = async () => {
+
     try {
         const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts`);
         const result = await response.json();
@@ -15,4 +15,51 @@ export const fetchAllPosts = async ()=>{
 
 }
 
+export async function registerPerson(event) {
+    const registerUsername = event.target[0].value;
+    const registerPassword = event.target[1].value;
+    try {
+        const response = await 
+            fetch(`${BASE_URL}/API/${COHORT_NAME}/users/register`, 
+            {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: {
+                    username: registerUsername,
+                    password: registerPassword
+                }
+            })
+        })
+        const result = await response.json()
+    }
+    catch (error) { console.error(error) }
+}
 
+//return object from api
+
+export async function login(event) {
+    const LoginUsername = event.target[0].value;
+    const LoginPassword = event.target[1].value;
+    try {
+        const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/users/login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: {
+                    username: LoginUsername,
+                    password: LoginPassword
+                }
+            })
+        })
+        const result = await response.json()
+        const token = result.data.token
+        localStorage.setItem("token", token)
+        const tokenFromStorage = localStorage.getItem("token")
+    }
+    catch (error){ console.error(error)}
+}
