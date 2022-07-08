@@ -1,10 +1,23 @@
 export const BASE_URL = "https://strangers-things.herokuapp.com";
 export const COHORT_NAME = "2206-FTB-ET-WEB-FT";
 
-export const fetchAllPosts = async () => {
+export const fetchAllPosts = async (token) => {
 
     try {
-        const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts`);
+        let response = ""
+        if (!token){
+        response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts`);
+        }
+        else {
+            response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts`,
+        {
+           method: 'GET',
+           headers: { 
+               'Content-Type': 'application/json',
+               Authorization: `Bearer ${token}`
+           } 
+        })
+    }
         const result = await response.json();
         console.log("inside fetchAllPosts", result)
         return result;

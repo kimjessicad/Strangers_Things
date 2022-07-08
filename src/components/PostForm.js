@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { createNewPost } from "../api";
 
 
@@ -9,11 +9,16 @@ const PostForm = () => {
     // const [description,setDescription]=useState('');
     // const [location,setLocation]=useState('');
     // const [willDeliver,setWillDeliver]=useState('no');
+    const [checked,setChecked] = useState("unchecked")
     const titleInput = React.useRef();
     const priceInput = React.useRef();
     const descriptionInput = React.useRef();
     const locationInput = React.useRef();
     const willDeliverInput = React.useRef();
+
+    function handleCheckbox() {
+        setChecked((checked==="checked")? "unchecked" : "checked")
+    }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -23,7 +28,7 @@ const PostForm = () => {
             "price": event.target[1].value,
             "description": event.target[2].value,
             "location" : event.target[3].value,
-            "willDeliver" : event.target[4].value
+            "willDeliver" : checked === "checked"
         }
         clearInput()
         const backFromAPI = createNewPost(formObj,localStorage.getItem("token"));
@@ -49,7 +54,7 @@ const PostForm = () => {
           
           
           <label htmlFor="willDeliver"> 
-                <input ref={willDeliverInput} type="checkbox" id="willDeliver" name="willDeliver" value="yes" />Will Deliver?</label>
+                <input ref={willDeliverInput} type="checkbox" id="willDeliver" onChange={handleCheckbox}  />Will Deliver?</label>
           <button type ="submit">Create Post</button>
       </form>
   )
