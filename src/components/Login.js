@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 import { login } from "../api";
 
-
-
-
-
 const Login = ({setUser}) => {
     const [username, setUsername] = useState ("");
     const [password, setPassword] = useState ("");
@@ -15,9 +11,7 @@ const Login = ({setUser}) => {
         if (backFromAPI === localStorage.token) {
             setUser(username)
         }
-      
     }
-
 
     return (
         <form onSubmit={handleSubmit}>

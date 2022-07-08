@@ -54,7 +54,7 @@ const PostForm = () => {
           
           
           <label htmlFor="willDeliver"> 
-                <input ref={willDeliverInput} type="checkbox" id="willDeliver" onChange={handleCheckbox}  />Will Deliver?</label>
+                Will Deliver?</label><input ref={willDeliverInput} type="checkbox" id="willDeliver" onChange={handleCheckbox} />
           <button type ="submit">Create Post</button>
       </form>
   )

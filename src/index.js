@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { fetchAllPosts } from "./api";
 import { Posts, Login, Register, Profile, PostForm } from "./components";
 
@@ -25,15 +26,28 @@ const App = () => {
   posts.data ? console.log(posts.data.posts) : null;
 
   return (
-    <div className="app">
-      {localStorage.getItem("token") ? <Profile /> : null}
+      <BrowserRouter>
+        <div id ="container">
+          <div id ="navbar">
+            <Link to="/">Home</Link>
+            <Link to="/profile">Profile</Link>
+            <Link to="/login">Login</Link>
+          </div>
+          <div id = 'main-section'>
+            <Routes>
+            <Route path ="/profile" element={localStorage.getItem("token") ? <Profile /> : null}>
+            </Route>
+            <Route path ="/login" element = {<Login setUser={setUser}/>}>
+            {/*put Register in Login*/}
+            </Route>
+            <Route exact path="/" element= {<Fragment><PostForm/>{posts.data ? <Posts posts={posts} username={user}/> : null}</Fragment>}>
+            </Route>
+            </Routes>
+          </div>
+        </div>
 
-      <Register />
-      <Login setUser={setUser}/>
 
-      {posts.data ? <Posts posts={posts} username={user}/> : null}
-    <PostForm />
-    </div>
+      </BrowserRouter>
   );
 };
 

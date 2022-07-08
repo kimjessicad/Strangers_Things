@@ -113,3 +113,15 @@ export async function createNewPost(postObj,token) {
       return result;
 }
 
+export const deletePost = async (token, postID) => {
+    const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts/${postID}`,
+    {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+const result = await response.json()
+console.log(result)
+}

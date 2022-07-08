@@ -1,10 +1,20 @@
 //this component renders a view of posts to unauthenticated users, following step 1 of the development path in the workshop
 
 import React from "react";
+import { deletePost } from "../api";
+import { MessageForm } from "./MessageForm"
 
 const Posts = (props) => {
   const posts = props.posts.data;
   const username = props.username;
+
+const handleDelete = async (event) => {
+  event.preventDefault()
+  const token = localStorage.token
+  const postId = event.target.id
+  deletePost(token, postId)
+}
+
 
   console.log(posts)
   return (
@@ -26,6 +36,10 @@ const Posts = (props) => {
              <p>Look! This post is mine!</p>
              :null
             }
+
+            <button id={`${e._id}`} onClick= {handleDelete}>Delete</button>
+
+
 
           </div>
       )
