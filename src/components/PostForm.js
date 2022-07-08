@@ -48,7 +48,7 @@ const PostForm = () => {
           <input ref={locationInput}id='location' type = 'text' placeholder='Item location' />
           
           
-          <label for="willDeliver"> 
+          <label htmlFor="willDeliver"> 
                 <input ref={willDeliverInput} type="checkbox" id="willDeliver" name="willDeliver" value="yes" />Will Deliver?</label>
           <button type ="submit">Create Post</button>
       </form>

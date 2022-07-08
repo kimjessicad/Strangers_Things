@@ -12,7 +12,10 @@ const Login = ({setUser}) => {
     async function handleSubmit(event) {
         event.preventDefault()
         const backFromAPI = await login(event)
-        console.log(backFromAPI, "this is the login response")
+        if (backFromAPI === localStorage.token) {
+            setUser(username)
+        }
+      
     }
 
 

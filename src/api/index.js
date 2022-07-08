@@ -1,5 +1,5 @@
 export const BASE_URL = "https://strangers-things.herokuapp.com";
-export const COHORT_NAME = "'2206-FTB-ET-WEB-FT'";
+export const COHORT_NAME = "2206-FTB-ET-WEB-FT";
 
 export const fetchAllPosts = async () => {
 
@@ -96,6 +96,7 @@ export async function createNewPost(postObj,token) {
         })
       }) 
       const result = await response.json()
-      console.log(result)  
+      console.log(result)
+      return result;
 }
 

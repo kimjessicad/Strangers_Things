@@ -4,6 +4,8 @@ import React from "react";
 
 const Posts = (props) => {
   const posts = props.posts.data;
+  const username = props.username;
+
   console.log(posts)
   return (
     <div>
@@ -19,7 +21,7 @@ const Posts = (props) => {
              <p>{e.location}</p>
              {e.willDeliver ? <p> Will deliver </p> : null}
              {
-             (e.author.username === localStorage.username)?
+             (e.author.username === username)?
              //this is where we do the stuff for our own posts
              <p>Look! This post is mine!</p>
              :null
