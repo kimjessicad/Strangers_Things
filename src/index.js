@@ -7,6 +7,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
 
+
   const fetchPosts = async () => {
     try {
       const result = await fetchAllPosts();
@@ -28,9 +29,9 @@ const App = () => {
       {localStorage.getItem("token") ? <Profile /> : null}
 
       <Register />
-      <Login />
+      <Login setUser={setUser}/>
 
-      {posts.data ? <Posts posts={posts} /> : null}
+      {posts.data ? <Posts posts={posts} username={user}/> : null}
     <PostForm />
     </div>
   );

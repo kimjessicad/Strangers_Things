@@ -3,14 +3,18 @@ import { login } from "../api";
 
 
 
-async function handleSubmit(event) {
-    event.preventDefault()
-    const backFromAPI = await login(event)
-}
 
-const Login = () => {
+
+const Login = ({setUser}) => {
     const [username, setUsername] = useState ("");
     const [password, setPassword] = useState ("");
+
+    async function handleSubmit(event) {
+        event.preventDefault()
+        const backFromAPI = await login(event)
+        console.log(backFromAPI, "this is the login response")
+    }
+
 
     return (
         <form onSubmit={handleSubmit}>
