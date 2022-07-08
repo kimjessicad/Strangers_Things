@@ -60,6 +60,7 @@ const App = () => {
             </Route>
             <Route exact path="/" element= {<Fragment><PostForm/>{posts.data ? <Posts posts={posts} username={user} isLoggedIn={isLoggedIn}/> : null}</Fragment>}>
             </Route>
+            <Route path ="/register" element ={<Register/>}></Route>
             </Routes>
           </div>
         </div>

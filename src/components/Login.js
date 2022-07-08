@@ -1,7 +1,9 @@
 import React, {useState} from "react";
+import { useNavigate } from 'react-router'
 import { login } from "../api";
 
 const Login = ({setUser, setIsLoggedIn}) => {
+    let navigate = useNavigate();
     const [username, setUsername] = useState ("");
     const [password, setPassword] = useState ("");
 
@@ -14,17 +16,22 @@ const Login = ({setUser, setIsLoggedIn}) => {
             
         }
     }
+    function handleClick(){
+        navigate('/register')
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label> Username </label>
-            <input id="username" type="text" placeholder="enter username"></input>
-
-            <label> Password </label>
-            <input id="password" type="text" placeholder="enter password"></input>
-            <button type ="submit">Login</button>
-        </form>
-        
+        <div id="loginPage">
+            <h2> Login </h2>
+           <form onSubmit={handleSubmit}>
+                <label> Username </label>
+                <input id="username" type="text" placeholder="enter username"></input>
+                <label> Password </label>
+                <input id="password" type="text" placeholder="enter password"></input>
+              <button type ="submit">Login</button>
+            </form>
+            <button onClick={handleClick}>New user? Click here to register</button>
+        </div>
     )
 }
 

@@ -12,6 +12,8 @@ const Register = () => {
     }
 
     return (
+        <div>
+        <h2>Register New User</h2>
         <form onSubmit={handleSubmit}>
             <label> Username </label>
             <input id="username" type="text" placeholder="enter username"></input>
@@ -20,7 +22,7 @@ const Register = () => {
             <input id="password" type="text" placeholder="enter password"></input>
             <button type="submit">Register</button>
         </form>
-
+        </div>
     )
 
 }
