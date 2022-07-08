@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { login } from "../api";
 
-const Login = ({setUser}) => {
+const Login = ({setUser, setIsLoggedIn}) => {
     const [username, setUsername] = useState ("");
     const [password, setPassword] = useState ("");
 
@@ -10,6 +10,8 @@ const Login = ({setUser}) => {
         const backFromAPI = await login(event)
         if (backFromAPI === localStorage.token) {
             setUser(username)
+            setIsLoggedIn(true)
+            
         }
     }
 

@@ -1,11 +1,11 @@
 export const BASE_URL = "https://strangers-things.herokuapp.com";
 export const COHORT_NAME = "2206-FTB-ET-WEB-FT";
 
-export const fetchAllPosts = async (token) => {
+export const fetchAllPosts = async (isLoggedIn) => {
 
     try {
         let response = ""
-        if (!token){
+        if (!isLoggedIn){
         response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts`);
         }
         else {
@@ -14,10 +14,11 @@ export const fetchAllPosts = async (token) => {
            method: 'GET',
            headers: { 
                'Content-Type': 'application/json',
-               Authorization: `Bearer ${token}`
+               Authorization: `Bearer ${localStorage.token}`
            } 
         })
-    }
+        console.log("I MADE A CALL FOR POSTS WITH A TOKEN")
+        } //end of else block
         const result = await response.json();
         console.log("inside fetchAllPosts", result)
         return result;

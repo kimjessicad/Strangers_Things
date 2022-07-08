@@ -2,6 +2,11 @@ import React from "react";
 
 const MessageForm = () => {
 
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+        
+    }
+
     return(
     <form onSubmit={handleSubmit}>
     <label>Message</label>

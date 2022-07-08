@@ -1,21 +1,24 @@
 //this component renders a view of posts to unauthenticated users, following step 1 of the development path in the workshop
 
 import React from "react";
+import { useEffect } from "react";
 import { deletePost } from "../api";
-import { MessageForm } from "./MessageForm"
+import { MessageForm } from "./";
 
 const Posts = (props) => {
   const posts = props.posts.data;
-  const username = props.username;
+  const {username, isLoggedIn} = props
+  useEffect(() => {
+    console.log("useEffect ran in Posts");
+  }, []);
 
-const handleDelete = async (event) => {
-  event.preventDefault()
-  const token = localStorage.token
-  const postId = event.target.id
-  deletePost(token, postId)
-}
-
-
+  const handleDelete = async (event) => {
+    event.preventDefault()
+    const token = localStorage.token
+    const postId = event.target.id
+    deletePost(token, postId)
+  }
+  
   console.log(posts)
   return (
     <div>
@@ -31,15 +34,11 @@ const handleDelete = async (event) => {
              <p>{e.location}</p>
              {e.willDeliver ? <p> Will deliver </p> : null}
              {
-             (e.author.username === username)?
+             e.isAuthor?
              //this is where we do the stuff for our own posts
-             <p>Look! This post is mine!</p>
-             :null
+             <button id={`${e._id}`} onClick= {handleDelete}>Delete</button>
+             :isLoggedIn ? <MessageForm /> : null
             }
-
-            <button id={`${e._id}`} onClick= {handleDelete}>Delete</button>
-
-
 
           </div>
       )
