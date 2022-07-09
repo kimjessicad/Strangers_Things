@@ -1,26 +1,72 @@
 import React from "react";
+import { useNavigate } from 'react-router'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-const NavBar = ({ isLoggedIn }) => {
+const NavBar = () => {
+  let navigate = useNavigate();
+
+  function handleClickHome() {
+    navigate('/')
+  }
+  function handleClickProfile() {
+    navigate('/profile')
+  }
+  function handleClickLogin() {
+    navigate('/register')
+  }
+
   return (
-  <BrowserRouter>
-    <div id="navbar">
-      <Link to="/">Home</Link>
-      <Link to="/profile">Profile</Link>
-      <Link to="/login">Login</Link>
-      <Routes>
-            <Route path ="/profile" element={localStorage.getItem("token") ? <Profile /> : null}>
-            </Route>
-            <Route path ="/login" element = {<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>}>
-            {/*put Register in Login*/}
-            </Route>
-            <Route exact path="/" element= {<Fragment><NavBar isLoggedIn={isLoggedIn}/></Fragment>}>
-            </Route>
-            </Routes>
+    
+    <div id='navbar'>
+      <button onClick={handleClickHome}>Home</button>
+      <button onClick={handleClickProfile}>Profile</button>
+      <button onClick={handleClickLogin}>Login</button>
     </div>
-  </BrowserRouter>
   )
 
 };
 
 export default NavBar;
+
+
+{/* <div id ="navbar">
+            {
+            ({isLoggedIn})
+            ? <>
+            <Link to="/">Home</Link>
+            <Link to="/login">Login</Link>
+            </>
+
+            : <>
+            <Link to="/">Home</Link>
+            <Link to="/profile">Profile</Link>
+            <button onClick={handleLogoutButton}>Logout</button>
+            </> } */}
+
+
+
+
+
+// async function handleSubmit(event) {
+//   event.preventDefault()
+//   const backFromAPI = await login(event)
+//   if (backFromAPI === localStorage.token) {
+//       setUser(username)
+//       setIsLoggedIn(true)
+//       navigate('/')
+//   }
+// }
+
+
+// return (
+//   <div id="loginPage">
+//       <h2> Login </h2>
+//      <form onSubmit={handleSubmit}>
+//           <label> Username </label>
+//           <input id="username" type="text" placeholder="enter username"></input>
+//           <label> Password </label>
+//           <input id="password" type="text" placeholder="enter password"></input>
+//         <button type ="submit">Login</button>
+//       </form>
+//       <button onClick={handleClick}>New user? Click here to register</button>
+//   </div>

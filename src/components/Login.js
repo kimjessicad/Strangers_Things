@@ -13,7 +13,7 @@ const Login = ({setUser, setIsLoggedIn}) => {
         if (backFromAPI === localStorage.token) {
             setUser(username)
             setIsLoggedIn(true)
-            
+            navigate('/')
         }
     }
     function handleClick(){
