@@ -1,9 +1,14 @@
 import React from "react";
+import { sendNewMessage } from "../api";
 
-const MessageForm = () => {
+const MessageForm = ({postId}) => {
 
     const handleSubmit = (event)=>{
         event.preventDefault();
+        const message=event.target[0].value
+        const token = localStorage.getItem("token")
+        console.log("message & postId",message,postId)
+        sendNewMessage(message,postId,token)
         
     }
 

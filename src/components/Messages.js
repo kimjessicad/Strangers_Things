@@ -1,24 +1,21 @@
 import React, { useEffect } from "react";
 
-const Messages = () => {
-    // let token = "";
-    // const [myMessages, setMyMessages] = useState({})
+const Messages = ({myMessages}) => {
+     return (
+         myMessages.length ?
+         myMessages.map((message => {
+             return (
+                 <>
+                 <h4>From: {message.fromUser.username}</h4>
+                 <h5>Sent: {message.updatedAt}</h5>
+                 <h5>On Post: {message.post.title}</h5>
+                 <p>Message: {message.content}</p>
 
-    // useEffect(()=> {
-    //     token = localStorage.getItem("token")
-    //     async function getMyMessages() {
-    //         const myReturnedMessages = await getMessages(token)
-    //         console.log(myReturnedMessages, "returned messages in Messages:useEffect")
-    //         setMyMessages(myReturnedMessages)
-    //     }
-    //     getMyMessages()
-    // },[])
-
-    // return (
-    //     <div>
-    //         I am my messages.
-    //     </div>
-    // )
+                 </>
+             )
+         }))
+         : <p>You have no messages.</p>
+     )
 
     
 }

@@ -11,11 +11,7 @@ const App = () => {
   const [isNewUser, setIsNewUser] = useState(false);
 
 
-  const handleLogoutButton = (event)=>{
-    event.preventDefault();
-    setIsLoggedIn(false);
-    localStorage.removeItem("token");
-  }
+ 
   const fetchPosts = async () => {
     try {
       const result = await fetchAllPosts(isLoggedIn);
@@ -41,14 +37,14 @@ const App = () => {
           </div>
           <div id = 'main-section'>
             <Routes>
-            <Route path ="/profile" element={<Fragment>< NavBar/>{localStorage.getItem("token") ? <Profile /> : null}</Fragment>}>
+            <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile user={user} /> : null}</Fragment>}>
             </Route>
-            <Route path ="/login" element = {<Fragment>< NavBar/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
+            <Route path ="/login" element = {<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
             {/*put Register in Login*/}
             </Route>
-            <Route exact path="/" element= {<Fragment><NavBar/><PostForm/>{posts.data ? <Posts posts={posts} username={user} isLoggedIn={isLoggedIn}/> : null}</Fragment>}>
+            <Route exact path="/" element= {<Fragment><NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><PostForm/>{posts.data ? <Posts posts={posts} username={user} isLoggedIn={isLoggedIn}/> : null}</Fragment>}>
             </Route>
-            <Route path ="/register" element ={<Fragment>< NavBar/><Register/></Fragment>}></Route>
+            <Route path ="/register" element ={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Register/></Fragment>}></Route>
             </Routes>
           </div>
         </div>

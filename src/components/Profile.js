@@ -3,9 +3,11 @@ import { getProfile } from "../api";
 import { Messages } from "../components"
 import { MyPosts } from "../components"
 
-const Profile = (props) => {
+const Profile = ({user}) => {
     let token = "";
     const [myInfo, setMyInfo] = useState({})
+    const [myMessages,setMyMessages] = useState([])
+    const [myPosts, setMyPosts] = useState([])
 
     useEffect(()=> {
         token = localStorage.getItem("token")
@@ -13,14 +15,18 @@ const Profile = (props) => {
             const myReturnedInfo = await getProfile(token)
             console.log(myReturnedInfo, "returned info in Profile:useEffect")
             setMyInfo(myReturnedInfo)
+            setMyMessages(myReturnedInfo.messages)
+            setMyPosts(myReturnedInfo.posts)
         }
         getMyInfo()
     },[])
 
     return (
         <div>
-         I am a profile.  I am not implemented yet.  Once they are built,
-         MyPosts and MyMessages will be represented here.
+          <h2>{myInfo.username}'s Profile</h2>
+          <Messages myMessages={myMessages} />
+          <MyPosts myPosts={myPosts} />
+
         </div>
     )
 }

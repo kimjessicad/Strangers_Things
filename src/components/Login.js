@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router'
-import { login } from "../api";
+import { login, getProfile } from "../api";
 
 const Login = ({setUser, setIsLoggedIn}) => {
     let navigate = useNavigate();
@@ -11,7 +11,7 @@ const Login = ({setUser, setIsLoggedIn}) => {
         event.preventDefault()
         const backFromAPI = await login(event)
         if (backFromAPI === localStorage.token) {
-            setUser(username)
+            setUser(getProfile())
             setIsLoggedIn(true)
             navigate('/')
         }

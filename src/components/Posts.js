@@ -32,12 +32,13 @@ const Posts = (props) => {
              <h4>{`Seller: ${e.author.username}`}</h4>
              <p>{e.description}</p>
              <p>{e.location}</p>
+             <p>{e._id} This is the postId and we will delete it.</p>
              {e.willDeliver ? <p> Will deliver </p> : null}
              {
              e.isAuthor?
              //this is where we do the stuff for our own posts
              <button id={`${e._id}`} onClick= {handleDelete}>Delete</button>
-             :isLoggedIn ? <MessageForm /> : null
+             :isLoggedIn ? <MessageForm postId={e._id}/> : null
             }
 
           </div>

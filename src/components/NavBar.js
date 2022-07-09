@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({isLoggedIn, setIsLoggedIn}) => {
   let navigate = useNavigate();
 
   function handleClickHome() {
@@ -12,15 +12,25 @@ const NavBar = () => {
     navigate('/profile')
   }
   function handleClickLogin() {
-    navigate('/register')
+    navigate('/login')
+  }
+  const handleClickLogout = (event)=>{
+    event.preventDefault();
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
   }
 
   return (
     
     <div id='navbar'>
       <button onClick={handleClickHome}>Home</button>
+      {isLoggedIn ?<>
       <button onClick={handleClickProfile}>Profile</button>
+      <button onClick={handleClickLogout}>Logout</button>
+      </>
+      :
       <button onClick={handleClickLogin}>Login</button>
+      }
     </div>
   )
 
