@@ -26,7 +26,7 @@ const Posts = (props) => {
       posts.posts.map((e)=>(
           <div key={ e.id } className="post">
              <h2 className="postTitle">
-                 { e.title }
+                 {e.title? e.title:"untitled post" }
              </h2>
              <h3>{e.price}</h3>
              <h4>{`Seller: ${e.author.username}`}</h4>

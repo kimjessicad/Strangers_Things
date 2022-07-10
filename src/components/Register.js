@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import { registerPerson } from "../api";
+import { useNavigate } from 'react-router'
 
 const Register = () => {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     async function handleSubmit(event) {
         event.preventDefault()
-        const backFromAPI = await registerPerson(event)
+        await registerPerson(event)
+        navigate('/login')
     }
 
     return (
