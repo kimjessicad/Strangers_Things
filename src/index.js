@@ -9,6 +9,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
+  const [newPostCreated, setNewPostCreated] = useState(false);
 
 
  
@@ -24,11 +25,12 @@ const App = () => {
 
   useEffect(() => {
     setIsLoggedIn(!!localStorage.token);
+    setNewPostCreated(false);
     setPosts(fetchPosts());
-    console.log("useEffect ran and isLoggedIn was",isLoggedIn)
-  }, [isLoggedIn]);
 
-  posts.data ? console.log(posts.data.posts) : null;
+    console.log("useEffect ran and isLoggedIn was",isLoggedIn)
+    console.log(posts)
+  }, [isLoggedIn,newPostCreated]);
 
   return (
       <BrowserRouter>
@@ -42,7 +44,7 @@ const App = () => {
             <Route path ="/login" element = {<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
             {/*put Register in Login*/}
             </Route>
-            <Route exact path="/" element= {<Fragment><NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><PostForm/>{posts.data ? <Posts posts={posts} username={user} isLoggedIn={isLoggedIn}/> : null}</Fragment>}>
+            <Route exact path="/" element= {<Fragment><NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><PostForm setNewPostCreated={setNewPostCreated}/>{posts.data ? <Posts posts={posts} username={user} isLoggedIn={isLoggedIn}/> : null}</Fragment>}>
             </Route>
             <Route path ="/register" element ={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Register/></Fragment>}></Route>
             </Routes>

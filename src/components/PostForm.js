@@ -3,12 +3,8 @@ import { createNewPost } from "../api";
 
 
 
-const PostForm = () => {
-    // const [title,setTitle]=useState('');
-    // const [price,setPrice]=useState('');
-    // const [description,setDescription]=useState('');
-    // const [location,setLocation]=useState('');
-    // const [willDeliver,setWillDeliver]=useState('no');
+const PostForm = ({setNewPostCreated}) => {
+
     const [checked,setChecked] = useState("unchecked")
     const titleInput = React.useRef();
     const priceInput = React.useRef();
@@ -32,6 +28,7 @@ const PostForm = () => {
         }
         clearInput()
         const backFromAPI = createNewPost(formObj,localStorage.getItem("token"));
+        setNewPostCreated(true);
     }
     const clearInput =() =>{
         titleInput.current.value = "";

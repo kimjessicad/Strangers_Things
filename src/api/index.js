@@ -105,6 +105,7 @@ export async function createNewPost(postObj,token) {
             title: postObj.title,
             description: postObj.description,
             price: postObj.price,
+            location: postObj.location,
             willDeliver: postObj.willDeliver
           }
         })
