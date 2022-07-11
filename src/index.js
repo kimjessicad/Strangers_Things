@@ -16,7 +16,6 @@ const App = () => {
   const fetchPosts = async () => {
     try {
       const result = await fetchAllPosts(isLoggedIn);
-      console.log(result, "inside fetchPosts");
       setPosts(result);
     } catch (error) {
       console.error(error);
@@ -26,10 +25,7 @@ const App = () => {
   useEffect(() => {
     setIsLoggedIn(!!localStorage.token);
     setNewPostCreated(false);
-    setPosts(fetchPosts());
-
-    console.log("useEffect ran and isLoggedIn was",isLoggedIn)
-    console.log(posts)
+    setPosts(fetchPosts()); 
   }, [isLoggedIn,newPostCreated]);
 
   return (

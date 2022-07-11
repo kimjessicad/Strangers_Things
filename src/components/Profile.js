@@ -13,7 +13,6 @@ const Profile = ({user}) => {
         token = localStorage.getItem("token")
         async function getMyInfo() {
             const myReturnedInfo = await getProfile(token)
-            console.log(myReturnedInfo, "returned info in Profile:useEffect")
             setMyInfo(myReturnedInfo)
             setMyMessages(myReturnedInfo.messages)
             setMyPosts(myReturnedInfo.posts)

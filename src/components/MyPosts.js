@@ -5,7 +5,6 @@ const MyPosts = ({ myPosts }) => {
   const showInactiveCheckbox = useRef();
 
   function handleShowInactive(event) {
-      console.log(event);
       setShowInactive(showInactive ? false : true);
       event.target.checked = !showInactive;
 
@@ -19,7 +18,7 @@ const MyPosts = ({ myPosts }) => {
       {myPosts.length ? (
         myPosts.map((post) => {
           return showInactive || post.active ? (
-            <div className="post">
+            <div key= {`myPost${post._id}`} className="post">
               <h2>{post.title}</h2>
               <h4>{post.messages.length} Messages</h4>
               <button>More Info (not implemented)</button>

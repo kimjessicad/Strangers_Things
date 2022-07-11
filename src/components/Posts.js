@@ -19,12 +19,11 @@ const Posts = (props) => {
     deletePost(token, postId)
   }
   
-  console.log(posts)
   return (
     <div>
       { posts.posts.length ?
       posts.posts.map((e)=>(
-          <div key={ e.id } className="post">
+          <div key={ e._id } className="post">
              <h2 className="postTitle">
                  {e.title? e.title:"untitled post" }
              </h2>

@@ -17,10 +17,8 @@ export const fetchAllPosts = async (isLoggedIn) => {
                Authorization: `Bearer ${localStorage.token}`
            } 
         })
-        console.log("I MADE A CALL FOR POSTS WITH A TOKEN")
         } //end of else block
         const result = await response.json();
-        console.log("inside fetchAllPosts", result)
         return result;
 
     } catch (err) {
