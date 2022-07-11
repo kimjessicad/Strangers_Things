@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-const SearchBar = ({ posts, setSearchMatches }) => {
+const SearchBar = ({ posts, setSearchMatches, setActiveSearch }) => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const searchInput = React.useRef();
@@ -10,12 +10,18 @@ const SearchBar = ({ posts, setSearchMatches }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSearchTerm(event.target[0].value)
-        const searchedString = searchTerm.toLowerCase();
+        console.log(searchTerm, "this is our searchTerm")
+        // const searchedString = searchTerm.toLowerCase();
         let matches = []
-        matches = posts.data.posts.filter((post) => post.title.toLowerCase().includes(searchedString))
+        const searchedString = event.target[0].value.toLowerCase();
+        matches = posts.data.posts.filter((post) => (post.title.toLowerCase().includes(searchedString) || post.description.toLowerCase().includes(searchedString)))
         console.log(matches)
         setSearchMatches(matches)
-        
+        if (matches.length === 0){
+            alert("No matches found for " + {searchTerm})
+        } else {
+            setActiveSearch(true)
+        }
         searchInput.current.value = ('')
 
     }

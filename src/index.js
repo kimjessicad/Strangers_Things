@@ -9,7 +9,9 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [newPostCreated, setNewPostCreated] = useState(false);
-  const [searchMatches, setSearchMatches] = useState([])
+  const [searchMatches, setSearchMatches] = useState([]);
+  const [activeSearch, setActiveSearch] = useState(false);
+
  
   const fetchPosts = async () => {
     try {
@@ -24,8 +26,8 @@ const App = () => {
     setIsLoggedIn(!!localStorage.token);
     setNewPostCreated(false);
     setPosts(fetchPosts()); 
-  }, [isLoggedIn,newPostCreated]);
-
+  }, [isLoggedIn,newPostCreated, activeSearch]);
+  console.log(searchMatches)
   return (
       <BrowserRouter>
         <div id ="container">
@@ -36,9 +38,29 @@ const App = () => {
             <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile user={user} /> : null}</Fragment>}>
             </Route>
             <Route path ="/login" element = {<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
-            {/*put Register in Login*/}
             </Route>
-            <Route exact path="/" element= {<Fragment><NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><PostForm setNewPostCreated={setNewPostCreated}/><SearchBar posts={posts} setSearchMatches= {setSearchMatches}/>{posts.data ? <Posts posts={posts} username={user} isLoggedIn={isLoggedIn}/> : null}</Fragment>}>
+            <Route exact path="/" element= {
+            <Fragment>
+              <NavBar 
+                setIsLoggedIn={setIsLoggedIn} 
+                isLoggedIn={isLoggedIn}/>
+              <PostForm 
+                setNewPostCreated={setNewPostCreated}/>
+              <SearchBar 
+                posts={posts} 
+                setSearchMatches= {setSearchMatches} 
+                setActiveSearch = {setActiveSearch} />
+            {posts.data ? 
+              <Posts 
+                posts={posts} 
+                isLoggedIn={isLoggedIn} 
+                activeSearch = {activeSearch} 
+                setActiveSearch = {setActiveSearch} 
+                searchMatches = {searchMatches}
+                />
+                : null}
+              </Fragment>
+            }>
             </Route>
             <Route path ="/register" element ={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Register/></Fragment>}></Route>
             </Routes>
