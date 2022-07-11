@@ -8,7 +8,7 @@ const Profile = ({user}) => {
     const [myInfo, setMyInfo] = useState({})
     const [myMessages,setMyMessages] = useState([])
     const [myPosts, setMyPosts] = useState([])
-
+   
     useEffect(()=> {
         token = localStorage.getItem("token")
         async function getMyInfo() {
