@@ -39,10 +39,27 @@
     font-size: 24px;
 }
 
-
-
 .navbutton:hover {
     border-top: 2px solid;
     border-bottom: 2px solid;
     color: #ac3b61;
+}
+
+#searchBarInput{
+    width: 90%;
+    margin-top: 15px;
+}
+
+#searchButton{
+    width: 9%;
+}
+
+#clearSearchButton{
+    width:fit-content
+}
+
+.searchButtonContainer{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }

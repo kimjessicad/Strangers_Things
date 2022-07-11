@@ -18,7 +18,7 @@ const SearchBar = ({ posts, setSearchMatches, setActiveSearch }) => {
         console.log(matches)
         setSearchMatches(matches)
         if (matches.length === 0){
-            alert("No matches found for " + {searchTerm})
+            alert(`No matches found for ${searchedString}`)
         } else {
             setActiveSearch(true)
         }
@@ -29,8 +29,8 @@ const SearchBar = ({ posts, setSearchMatches, setActiveSearch }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input ref={searchInput} type='text' placeholder='Search for items here' />
-                <button type="submit">Search</button>
+                <input id="searchBarInput" ref={searchInput} type='text' placeholder='Search for items here' />
+                <button id="searchButton" type="submit">Search</button>
             </form>
         </div>
     )
