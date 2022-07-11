@@ -35,7 +35,7 @@ const App = () => {
           </div>
           <div id = 'main-section'>
             <Routes>
-            <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile user={user} /> : null}</Fragment>}>
+            <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile setNewPostCreated={setNewPostCreated} user={user} /> : null}</Fragment>}>
             </Route>
             <Route path ="/login" element = {<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
             </Route>

@@ -1,11 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { updatePost } from "../api";
 import SinglePost from "./SinglePost";
 
-const MyPosts = ({ myPosts }) => {
+const MyPosts = ({ myPosts, setNewPostCreated }) => {
   const [showInactive, setShowInactive] = useState(false);
   const showInactiveCheckbox = useRef();
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [userIsEditing, setUserIsEditing] = useState(false);
+  const titleInput = useRef();
+  const priceInput = useRef();
+  const descriptionInput = useRef();
+
+  useEffect(()=>{
+    console.log("This useEffect isn't doing stuff yet")
+  },[])
+
 
   function handleDetailButton(event) {
     setSelectedPostId(event.target.value);
@@ -26,7 +35,21 @@ const MyPosts = ({ myPosts }) => {
   }
 
 function handleSubmitChangesButton(event) {
+     const newTitle=titleInput.current.value;
+     const newPrice=priceInput.current.value;
+     const newDescription=descriptionInput.current.value;
+     const postObj = {
+       "title":newTitle,
+       "price":newPrice,
+       "description":newDescription
+     }
+     console.log(postObj)
+     console.log(event)
+    
+     const result = updatePost(event.target.value, postObj)
+     if (result) setNewPostCreated(true)
 
+     
 }
 
 function handleInput(event) {
@@ -64,9 +87,9 @@ function handleInput(event) {
               > {
                 userIsEditing ?
                 <div className="editPostInputContainer">
-                <input defaultValue={post.title} className="editFormTitleInput" onChange={handleInput}></input>
-                <input defaultValue={post.price} className="editFormPriceInput"></input>
-                <input defaultValue={post.description} className="editFormDescriptionInput"></input>
+                <><label>Title</label><input ref={titleInput} defaultValue={post.title} className="editFormTitleInput" onChange={handleInput}></input></>
+                <label>Price</label><input ref={priceInput} defaultValue={post.price} className="editFormPriceInput"></input>
+                <label>Description</label><input ref={descriptionInput} defaultValue={post.description} className="editFormDescriptionInput"></input>
                 </div>
                 :
                 <>
@@ -80,9 +103,12 @@ function handleInput(event) {
                 </>
               }
                 <div className="detailPostButtonPanel">
-                  {post.active ? <button onClick={handleEditButton}>Edit</button> : null}
+                  {post.active ? 
+                  userIsEditing ? <button value={post._id} onClick={handleSubmitChangesButton}>Submit</button>:
+                  <button onClick={handleEditButton}>Edit</button> : null}
                   <button onClick={handleCloseDetailsButton}>Close Details</button>
-                  {userIsEditing ? <button onClick={handleSubmitChangesButton}>Submit</button>:null}
+                  <p>{post._id}</p>
+                  
                 </div>
               </div>
             </>

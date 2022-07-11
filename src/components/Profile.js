@@ -3,7 +3,7 @@ import { getProfile } from "../api";
 import { Messages } from "../components"
 import { MyPosts } from "../components"
 
-const Profile = ({user}) => {
+const Profile = ({setNewPostCreated}) => {
     let token = "";
     const [myInfo, setMyInfo] = useState({})
     const [myMessages,setMyMessages] = useState([])
@@ -24,7 +24,7 @@ const Profile = ({user}) => {
         <div>
           <h2>{myInfo.username}'s Profile</h2>
           <Messages myMessages={myMessages} />
-          <MyPosts myPosts={myPosts} />
+          <MyPosts myPosts={myPosts} setNewPostCreated={setNewPostCreated} />
 
         </div>
     )
