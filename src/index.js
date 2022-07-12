@@ -2,7 +2,15 @@ import React, { useState, useEffect, Fragment } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { fetchAllPosts } from "./api";
-import { Posts, Login, Register, Profile, PostForm, NavBar, SearchBar } from "./components";
+import {
+  Posts,
+  Login,
+  Register,
+  Profile,
+  PostForm,
+  NavBar,
+  SearchBar,
+} from "./components";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -13,7 +21,6 @@ const App = () => {
   const [activeSearch, setActiveSearch] = useState(false);
   const [createPost, setCreatePost] = useState(false);
 
- 
   const fetchPosts = async () => {
     try {
       const result = await fetchAllPosts(isLoggedIn);
@@ -26,64 +33,109 @@ const App = () => {
   useEffect(() => {
     setIsLoggedIn(!!localStorage.token);
     setNewPostCreated(false);
-    setPosts(fetchPosts()); 
-  }, [isLoggedIn,newPostCreated, activeSearch]);
-  console.log(searchMatches)
+    setPosts(fetchPosts());
+  }, [isLoggedIn, newPostCreated, activeSearch]);
+  console.log(searchMatches);
 
-  function handleCreatePostButton(event){
-    setCreatePost(true)
+  function handleCreatePostButton(event) {
+    setCreatePost(true);
   }
 
-  function handleCancelPostButton(event){
-    setCreatePost(false)
+  function handleCancelPostButton(event) {
+    setCreatePost(false);
   }
-
 
   return (
-      <BrowserRouter>
-        <div id ="container">
-          <div id ="navbar">
-          </div>
-          <div id = 'main-section'>
-            <Routes>
-            <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile user={user} setNewPostCreated = {setNewPostCreated} /> : null}</Fragment>}>
-            </Route>
-            <Route path ="/login" element = {<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
-            </Route>
-            <Route exact path="/" element= {
-            <Fragment>
-              <NavBar 
-                setIsLoggedIn={setIsLoggedIn} 
-                isLoggedIn={isLoggedIn}/>
-              <button onClick= {handleCreatePostButton} className= { createPost ? "hidden" : "createPostButton"}>Create Post</button>
-              <button onClick={handleCancelPostButton} className= { !createPost ? "hidden" : "cancelPostButton"}>Cancel Post</button>
-              { !createPost ? null :
-                <PostForm 
-                setNewPostCreated={setNewPostCreated}/>}
+    <BrowserRouter>
+      <div id="container">
+        <div id="navbar"></div>
+        <div id="main-section">
+          <Routes>
+            <Route
+              path="/profile"
+              element={
+                <Fragment>
+                  <NavBar
+                    setIsLoggedIn={setIsLoggedIn}
+                    isLoggedIn={isLoggedIn}
+                  />
+                  {localStorage.getItem("token") ? (
+                    <Profile
+                      user={user}
+                      setNewPostCreated={setNewPostCreated}
+                    />
+                  ) : null}
+                </Fragment>
+              }
+            ></Route>
+            <Route
+              path="/login"
+              element={
+                <Fragment>
+                  <NavBar
+                    setIsLoggedIn={setIsLoggedIn}
+                    isLoggedIn={isLoggedIn}
+                  />
+                  <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />
+                </Fragment>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/"
+              element={
+                <Fragment>
+                  <NavBar
+                    posts={posts}
+                    setSearchMatches={setSearchMatches}
+                    setActiveSearch={setActiveSearch}
+                    setIsLoggedIn={setIsLoggedIn}
+                    isLoggedIn={isLoggedIn}
+                  />
+                  <button
+                    onClick={handleCreatePostButton}
+                    className={createPost ? "hidden" : "createPostButton"}
+                  >
+                    Create Post
+                  </button>
+                  <button
+                    onClick={handleCancelPostButton}
+                    className={!createPost ? "hidden" : "cancelPostButton"}
+                  >
+                    Cancel Post
+                  </button>
+                  {!createPost ? null : (
+                    <PostForm setNewPostCreated={setNewPostCreated} />
+                  )}
 
-              { createPost ? null : <SearchBar 
-                posts={posts} 
-                setSearchMatches= {setSearchMatches} 
-                setActiveSearch = {setActiveSearch} />}
-            {posts.data ? 
-              <Posts 
-                posts={posts} 
-                isLoggedIn={isLoggedIn} 
-                activeSearch = {activeSearch} 
-                setActiveSearch = {setActiveSearch} 
-                searchMatches = {searchMatches}
-                />
-                : null}
-              </Fragment>
-            }>
-            </Route>
-            <Route path ="/register" element ={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Register/></Fragment>}></Route>
-            </Routes>
-          </div>
+                  {posts.data ? (
+                    <Posts
+                      posts={posts}
+                      isLoggedIn={isLoggedIn}
+                      activeSearch={activeSearch}
+                      setActiveSearch={setActiveSearch}
+                      searchMatches={searchMatches}
+                    />
+                  ) : null}
+                </Fragment>
+              }
+            ></Route>
+            <Route
+              path="/register"
+              element={
+                <Fragment>
+                  <NavBar
+                    setIsLoggedIn={setIsLoggedIn}
+                    isLoggedIn={isLoggedIn}
+                  />
+                  <Register />
+                </Fragment>
+              }
+            ></Route>
+          </Routes>
         </div>
-
-
-      </BrowserRouter>
+      </div>
+    </BrowserRouter>
   );
 };
 

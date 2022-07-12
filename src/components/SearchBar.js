@@ -14,6 +14,7 @@ const SearchBar = ({ posts, setSearchMatches, setActiveSearch }) => {
         // const searchedString = searchTerm.toLowerCase();
         let matches = []
         const searchedString = event.target[0].value.toLowerCase();
+        console.log(posts, "POSTS!!!!!!!!!!~~~~~~~")
         matches = posts.data.posts.filter((post) => (post.title.toLowerCase().includes(searchedString) || post.description.toLowerCase().includes(searchedString)))
         console.log(matches)
         setSearchMatches(matches)
@@ -27,7 +28,7 @@ const SearchBar = ({ posts, setSearchMatches, setActiveSearch }) => {
     }
 
     return (
-        <div>
+        <div className="navBarRight">
             <form onSubmit={handleSubmit}>
                 <input id="searchBarInput" ref={searchInput} type='text' placeholder='Search for items here' />
                 <button id="searchButton" type="submit">Search</button>

@@ -87,11 +87,11 @@ export async function getProfile(token) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });} catch(error){console.error(error)}
+  });
 
   const result = await response.json();
   const data = result.data;
-  return data;
+  return data;}catch(error){console.error(error)}
 }
 
 export async function createNewPost(postObj, token) {

@@ -20,16 +20,30 @@
     padding: 4px;
 }
 .navbar {
-    background: #edc7b7;
-    color: #123c69;
+    background: black;
+    color: white;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     font-family: 'Anton', sans-serif;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
     
     padding: 8px;
 }
+
+@-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px red, 0 0 40px red, 0 0 50px red, 0 0 60px red, 0 0 70px red;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px darkred, 0 0 40px darkred, 0 0 50px darkred, 0 0 60px darkred, 0 0 70px darkred, 0 0 80px darkred;
+    }
+  }
 
 .createPostButton{
     width:100%
@@ -50,26 +64,33 @@
 }
 
 .navbutton {
-    background: #edc7b7;
-    color: #123c69;
+    background: none;
+    color: white;
     border:none;
-    font-size: 24px;
+    font-size: 19px;
 }
 
 .navbutton:hover {
     border-top: 2px solid;
     border-bottom: 2px solid;
-    color: #ac3b61;
+    color: red;
 }
 
-#searchBarInput{
-    width: 90%;
-    margin-top: 15px;
+.navBarLeft {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-#searchButton{
-    min-width: 9%;
+.navBarRight {
+    width:fit-content;
+    background: orange;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
 }
+
 
 #clearSearchButton{
     width:fit-content
