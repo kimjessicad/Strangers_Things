@@ -1,27 +1,113 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Ruslan+Display&display=swap');
+p{ margin: 0;}
+body{
+    background-color:#262626;
+    color:white
+}
+
+#loginPage {
+    font-family:sans-serif;
+    display:flex;
+    flex-direction:column;
+    max-width:300px;
+}
+
+#loginPage form {
+    display:flex;
+    flex-direction:column;
+}
+#loginPage input {
+    line-height:3;
+}
+#loginPage button {
+    line-height:3;
+    border-radius:.375em;
+    background-color: #262626;
+    color:white;
+    border: 1px solid white;
+    transition: background-color 1s;
+    margin-bottom: 10px;
+}
+#loginPage button:hover {
+    background-color: red;
+    color: white;
+}
+#loginPage p {
+    text-align:center;
+}
+#loginPage h2{
+    text-align:center;
+}
+
+#password {
+    margin-bottom: 10px;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+}
+
+#username {
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+}
+
 .hidden {
     display: none;
 }
 .post {
+    display:flex;
+    flex-direction:row;
     margin: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-   
+    
     padding: 4px;
+    margin-bottom: 12px;
+}
+
+.postRightLocationDeliver {
+    display:flex;
+    flex-direction:row;
+    align-items:baseline;
+    margin-bottom: 8px;
+
+}
+.postRightSide {
+    border-top:1px solid lightgray;
+    display:flex;
+    flex:1;
+    flex-direction:column;
+}
+.postLeftSide {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    width: 280px;
+    min-width: 280px;
+    border-top:1px solid lightgray;
+}
+
+.postLocation {
+    margin-right:12px;
 }
 .post h2 {
-    background:lightskyblue;
-    color:darkslategray;
+   
 }
 .message {
-    background: lightyellow;
-    margin: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-   
-    padding: 4px;
+    font-family:sans-serif;
+    display:flex;
+    flex-direction:column;
+    border-radius:.375em;
+    padding-left: 5px;
+    background-color: lightgray;
+    color:black;
+    min-height: 60px;
+    margin-bottom: 8px;
+
+}
+.messageLabel {
+    font-weight:bold;
 }
 .navbar {
     background: black;
-    color: white;
+
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -33,6 +119,7 @@
     -moz-animation: glow 1s ease-in-out infinite alternate;
     animation: glow 1s ease-in-out infinite alternate;
     
+    
     padding: 8px;
 }
 
@@ -41,7 +128,7 @@
       text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px red, 0 0 40px red, 0 0 50px red, 0 0 60px red, 0 0 70px red;
     }
     to {
-      text-shadow: 0 0 20px #fff, 0 0 30px darkred, 0 0 40px darkred, 0 0 50px darkred, 0 0 60px darkred, 0 0 70px darkred, 0 0 80px darkred;
+      text-shadow: 0 0 20px #fff, 0 0 30px black, 0 0 40px black, 0 0 50px black, 0 0 60px black, 0 0 70px black, 0 0 80px black;
     }
   }
 
@@ -55,12 +142,23 @@
 
 .postTitle{
     display: flex;
-    justify-content: space-between;
-    background: lightblue;
+
     font-weight: bold;
     font-size: 18px;
-    padding-left: 20px;
-    padding-right: 20px;
+
+}
+
+.postDescription {
+    display:flex;
+    
+    border-radius:.375em;
+    padding-left: 5px;
+    background-color: lightgray;
+    color:black;
+    min-height: 60px;
+    margin-bottom: 8px;
+
+
 }
 
 .navbutton {
@@ -83,8 +181,6 @@
 }
 
 .navBarRight {
-    width:fit-content;
-    background: orange;
     display:flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -110,3 +206,46 @@
 .editPostInputContainer input {
     margin-top: 5px;
 }
+
+.createPostButton {
+    background:black;
+    color:white;
+    font-size:16px;
+    border-radius:3em;
+    /* border:solid red 1px; */
+
+}
+
+.cancelPostButton {
+    background:black;
+    color:red;
+    font-size:16px;
+    border-radius:3em;
+    border:solid red 1px;
+
+}
+
+#searchBarInput {
+    width: auto;
+    min-width: 200px;
+    border-radius: .375rem;
+    line-height: 2;
+}
+
+#searchButton {
+    border-radius: .375rem;
+    line-height:2;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    transition: background-color 1s;
+    
+
+}
+
+#searchButton:hover{
+    background-color:red;
+}
+
+
+

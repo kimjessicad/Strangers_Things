@@ -77,7 +77,7 @@ function handleInput(event) {
             <>
               <div
                 key={`myPost${post._id}`}
-                className={post._id === selectedPostId ? "hidden" : "post"}
+                className={post._id === selectedPostId ? "hidden" : "myPost"}
               >
                 <h2>{post.title}</h2>
                 <h4>{post.messages.length} Messages</h4>

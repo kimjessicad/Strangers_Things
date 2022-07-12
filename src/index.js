@@ -38,6 +38,10 @@ const App = () => {
   console.log(searchMatches);
 
   function handleCreatePostButton(event) {
+    if(!isLoggedIn){
+      alert("You must be logged in to post.")
+      return null;
+    }
     setCreatePost(true);
   }
 

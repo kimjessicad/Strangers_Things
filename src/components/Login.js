@@ -24,13 +24,13 @@ const Login = ({setUser, setIsLoggedIn}) => {
         <div id="loginPage">
             <h2> Login </h2>
            <form onSubmit={handleSubmit}>
-                <label> Username </label>
-                <input id="username" type="text" placeholder="enter username"></input>
-                <label> Password </label>
-                <input id="password" type="text" placeholder="enter password"></input>
+              <>  
+                <input id="username" type="text" placeholder="enter username"></input></>
+                <>
+                <input id="password" type="text" placeholder="enter password"></input></>
               <button type ="submit">Login</button>
             </form>
-            <button onClick={handleClick}>New user? Click here to register</button>
+            <p onClick={handleClick}>New user? Click here to register</p>
         </div>
     )
 }

@@ -5,7 +5,7 @@ const Messages = ({myMessages, myUsername}) => {
     const [messageFilter,setMessageFilter]=useState("sent")
     const sentButton = useRef();
     const receivedButton = useRef();
-
+    console.log(myMessages);
     return (
          <div className="profileMessages">
              <h3 className="profileSectionTitle">Messages</h3>
@@ -15,9 +15,9 @@ const Messages = ({myMessages, myUsername}) => {
              return (
                  <div key={message._id}
                   className = "message">
-                 <h4>From: {message.fromUser.username}</h4>
-                 <h5>On Post: {message.post.title}</h5>
-                 <p>Message: {message.content}</p>
+                 <p><label className="messageLabel">From: </label>{message.fromUser.username}</p>
+                 <p><label className="messageLabel">On Post: </label>{message.post.title}</p>
+                 <p><label className="messageLabel">Message: </label>{message.content}</p>
 
                  </div>
              )

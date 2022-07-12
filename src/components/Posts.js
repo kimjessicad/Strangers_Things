@@ -30,20 +30,26 @@ const Posts = (props) => {
         posts.posts.length ?
           posts.posts.map((e) => (
             <div key={e._id} className="post">
-              <span className="postTitle"><p>
+              <div className="postLeftSide">
+                <p className="postTitle">
                 {e.title ? e.title : "untitled post"}
               </p>
-                <p>{`Seller: ${e.author.username}`}</p></span>
-              <h3>{e.price}</h3>
-              <p>{e.description}</p>
-              <p>{`Location: ${e.location}`}</p>
-              {e.willDeliver ? <p> ✅ Will deliver </p> : null}
+              <h3 className="postPrice">{e.price}</h3>
+                <p classname="postSeller">{`Seller: ${e.author.username}`}</p>
+                </div>
+             <div className="postRightSide">
+              <span className="postDescription">{e.description}</span>
+              <span className="postRightLocationDeliver">
+              <p className="postLocation">{e.location}</p>
+              {e.willDeliver ? <p className="willDeliver"> ✅ Will deliver </p> : null}
+              </span>
+              
               {
                 e.isAuthor ?
                   <button id={`${e._id}`} onClick={handleDelete}>Delete</button>
                   : isLoggedIn ? <MessageForm postId={e._id} /> : null
               }
-
+            </div>
             </div>
 
           )
@@ -55,20 +61,26 @@ const Posts = (props) => {
           </div>
           {searchMatches.map((e) => (
             <div key={e._id} className="post">
-              <span className="postTitle"><p>
+              <div className="postLeftSide">
+                <p className="postTitle">
                 {e.title ? e.title : "untitled post"}
               </p>
-                <p>{`Seller: ${e.author.username}`}</p></span>
-              <h3>{e.price}</h3>
-              <p>{e.description}</p>
-              <p>{e.location}</p>
-              {e.willDeliver ? <p> ✅ Will deliver </p> : null}
+              <h3 className="postPrice">{e.price}</h3>
+                <p classname="postSeller">{`Seller: ${e.author.username}`}</p>
+                </div>
+             <div className="postRightSide">
+              <p className="postDescription">{e.description}</p>
+              <span className="postRightLocationDeliver">
+              <p className="postLocation">{e.location}</p>
+              {e.willDeliver ? <p className="willDeliver"> ✅ Will deliver </p> : null}
+              </span>
+              
               {
                 e.isAuthor ?
                   <button id={`${e._id}`} onClick={handleDelete}>Delete</button>
                   : isLoggedIn ? <MessageForm postId={e._id} /> : null
               }
-
+            </div>
             </div>
           ))}
         </>
