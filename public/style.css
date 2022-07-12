@@ -30,8 +30,23 @@
     
     padding: 8px;
 }
-.navbar h1 {
-    font-size: 48px;
+
+.createPostButton{
+    width:100%
+}
+
+.cancelPostButton{
+    width: 100%
+}
+
+.postTitle{
+    display: flex;
+    justify-content: space-between;
+    background: lightblue;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .navbutton {
@@ -53,7 +68,7 @@
 }
 
 #searchButton{
-    width: 9%;
+    min-width: 9%;
 }
 
 #clearSearchButton{

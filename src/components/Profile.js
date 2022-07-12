@@ -16,6 +16,7 @@ const Profile = ({setNewPostCreated}) => {
             setMyInfo(myReturnedInfo)
             setMyMessages(myReturnedInfo.messages)
             setMyPosts(myReturnedInfo.posts)
+            console.log(myReturnedInfo)
         }
         getMyInfo()
     },[])

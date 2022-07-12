@@ -11,6 +11,7 @@ const App = () => {
   const [newPostCreated, setNewPostCreated] = useState(false);
   const [searchMatches, setSearchMatches] = useState([]);
   const [activeSearch, setActiveSearch] = useState(false);
+  const [createPost, setCreatePost] = useState(false);
 
  
   const fetchPosts = async () => {
@@ -28,6 +29,16 @@ const App = () => {
     setPosts(fetchPosts()); 
   }, [isLoggedIn,newPostCreated, activeSearch]);
   console.log(searchMatches)
+
+  function handleCreatePostButton(event){
+    setCreatePost(true)
+  }
+
+  function handleCancelPostButton(event){
+    setCreatePost(false)
+  }
+
+
   return (
       <BrowserRouter>
         <div id ="container">
@@ -35,7 +46,7 @@ const App = () => {
           </div>
           <div id = 'main-section'>
             <Routes>
-            <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile setNewPostCreated={setNewPostCreated} user={user} /> : null}</Fragment>}>
+            <Route path ="/profile" element={<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>{localStorage.getItem("token") ? <Profile user={user} setNewPostCreated = {setNewPostCreated} /> : null}</Fragment>}>
             </Route>
             <Route path ="/login" element = {<Fragment>< NavBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/><Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/></Fragment>}>
             </Route>
@@ -44,12 +55,16 @@ const App = () => {
               <NavBar 
                 setIsLoggedIn={setIsLoggedIn} 
                 isLoggedIn={isLoggedIn}/>
-              <PostForm 
-                setNewPostCreated={setNewPostCreated}/>
-              <SearchBar 
+              <button onClick= {handleCreatePostButton} className= { createPost ? "hidden" : "createPostButton"}>Create Post</button>
+              <button onClick={handleCancelPostButton} className= { !createPost ? "hidden" : "cancelPostButton"}>Cancel Post</button>
+              { !createPost ? null :
+                <PostForm 
+                setNewPostCreated={setNewPostCreated}/>}
+
+              { createPost ? null : <SearchBar 
                 posts={posts} 
                 setSearchMatches= {setSearchMatches} 
-                setActiveSearch = {setActiveSearch} />
+                setActiveSearch = {setActiveSearch} />}
             {posts.data ? 
               <Posts 
                 posts={posts} 
