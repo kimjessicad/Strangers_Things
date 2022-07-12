@@ -5,9 +5,6 @@ const Messages = ({myMessages, myUsername}) => {
     const [messageFilter,setMessageFilter]=useState("sent")
     const sentButton = useRef();
     const receivedButton = useRef();
-    let receivedMessages = [], sentMessages=[];
-    receivedMessages = myMessages.filter((message)=>(message.fromUser.username != myUsername))
-    sentMessages = myMessages.filter((message)=>(message.fromUser.username === myUsername))
     
     function handleInboxButtons(event) {
         const filterSetting = (event.target.value)
@@ -22,13 +19,15 @@ const Messages = ({myMessages, myUsername}) => {
          <div className="profileMessages">
              <h3 className="profileSectionTitle">Messages</h3>
              <div className = "inboxButtons" onChange={handleInboxButtons}>
-                 <input ref={sentButton} type="radio" value="sent" />
-                 <input ref={receivedButton} type="radio" value="received" />
+                 <label>Received</label><input ref={sentButton} type="radio" value="sent" />
+                 <label>Sent</label><input ref={receivedButton} type="radio" value="received" />
              </div>
-         {receivedMessages.length
-         ? receivedMessages.map((message) => {
+         {myMessages.length
+         ? myMessages.map((message) => {
              return (
-                 <div key={message._id} className="message">
+                 <div key={message._id}
+                  className = {(((messageFilter === 'sent') && (message.fromUser.username === myUsername)) || ((messageFilter === 'received')&&(message.fromUser.username != myUsername))) 
+                  ? "message": "hidden"}>
                  <h4>From: {message.fromUser.username}</h4>
                  <h5>Sent: {message.updatedAt}</h5>
                  <h5>On Post: {message.post.title}</h5>

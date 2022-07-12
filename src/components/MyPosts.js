@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { updatePost } from "../api";
+import { useNavigate } from 'react-router'
 import SinglePost from "./SinglePost";
 
 const MyPosts = ({ myPosts, setNewPostCreated }) => {
@@ -10,11 +11,11 @@ const MyPosts = ({ myPosts, setNewPostCreated }) => {
   const titleInput = useRef();
   const priceInput = useRef();
   const descriptionInput = useRef();
-
+  const navigate=useNavigate();
+  
   useEffect(()=>{
-    console.log("This useEffect isn't doing stuff yet")
-  },[])
-
+    myPosts
+  },[userIsEditing, selectedPostId])
 
   function handleDetailButton(event) {
     setSelectedPostId(event.target.value);
@@ -48,6 +49,9 @@ function handleSubmitChangesButton(event) {
     
      const result = updatePost(event.target.value, postObj)
      if (result) setNewPostCreated(true)
+     setUserIsEditing(false)
+     navigate('/')
+     setTimeout(()=>navigate('/profile'),1) //this is a pretty weak solution to get the post to re-render.
 
      
 }
