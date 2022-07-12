@@ -41,10 +41,14 @@ export async function registerPerson(event) {
         }),
       }
     );
+
     const result = await response.json();
+    return result;
   } catch (error) {
+    alert("Registration was unsuccessful")
     console.error(error);
   }
+
 }
 
 //return object from api
@@ -71,17 +75,19 @@ export async function login(event) {
     const tokenFromStorage = localStorage.getItem("token");
     return token;
   } catch (error) {
-    console.error(error);
+    alert("Your login attempt was unsuccessful")
+    console.error(error, "this is the error from login");
   }
 }
 
 export async function getProfile(token) {
-  const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/users/me`, {
+  try {
+    const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/users/me`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  });} catch(error){console.error(error)}
 
   const result = await response.json();
   const data = result.data;
@@ -89,6 +95,7 @@ export async function getProfile(token) {
 }
 
 export async function createNewPost(postObj, token) {
+  try {
   const response = await fetch(`${BASE_URL}/API/${COHORT_NAME}/posts`, {
     method: "POST",
     headers: {
@@ -104,14 +111,15 @@ export async function createNewPost(postObj, token) {
         willDeliver: postObj.willDeliver,
       },
     }),
-  });
+  });}catch(error){console.error(error)}
   const result = await response.json();
   console.log(result);
   return result;
 }
 
 export const deletePost = async (token, postID) => {
-  const response = await fetch(
+  try {
+    const response = await fetch(
     `${BASE_URL}/API/${COHORT_NAME}/posts/${postID}`,
     {
       method: "DELETE",
@@ -120,12 +128,13 @@ export const deletePost = async (token, postID) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  );
+  );}catch(error){console.error(error)}
   const result = await response.json();
   console.log(result);
 };
 
 export const sendNewMessage = async (message, postId, token) => {
+  
   console.log(`${BASE_URL}/API/${COHORT_NAME}/posts/${postId}/messages`);
   const response = await fetch(
     `${BASE_URL}/API/${COHORT_NAME}/posts/${postId}/messages`,

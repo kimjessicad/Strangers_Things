@@ -7,7 +7,8 @@ const Register = () => {
     const navigate = useNavigate();
     async function handleSubmit(event) {
         event.preventDefault()
-        await registerPerson(event)
+        const backFromApi = await registerPerson(event)
+        if (!backFromApi.data) alert("Registration failed")
         navigate('/login')
     }
 

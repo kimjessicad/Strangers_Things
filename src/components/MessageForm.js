@@ -6,11 +6,13 @@ const MessageForm = ({postId}) => {
 
     const handleSubmit = (event)=>{
         event.preventDefault();
+        if (event.target[0].value==="") {return null}
         const message=event.target[0].value
         const token = localStorage.getItem("token")
         console.log("message & postId",message,postId)
-        sendNewMessage(message,postId,token)
-        messageInput.current.value=""
+        const backFromApi=sendNewMessage(message,postId,token)
+        if(backFromApi){alert("Message sent")}
+  
     }
 
     return(
