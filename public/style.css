@@ -5,11 +5,15 @@ body{
     color:white
 }
 
+
 #loginPage {
     font-family:sans-serif;
-    display:flex;
     flex-direction:column;
+    justify-content: center;
+    align-items: center;
     max-width:300px;
+    margin: auto;
+    margin-top: 50px;
 }
 
 #loginPage form {
@@ -49,6 +53,49 @@ body{
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
 }
+
+.registerLink:hover{
+    color:red;
+    cursor: pointer;
+}
+
+#registerPage {
+    font-family:sans-serif;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    max-width:300px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#registerPage form {
+    display:flex;
+    flex-direction:column;
+}
+#registerPage input {
+    line-height:3;
+}
+#registerPage button {
+    line-height:3;
+    border-radius:.375em;
+    background-color: #262626;
+    color:white;
+    border: 1px solid white;
+    transition: background-color 1s;
+    margin-bottom: 10px;
+}
+#registerPage button:hover {
+    background-color: red;
+    color: white;
+}
+#registerPage p {
+    text-align:center;
+}
+#registerPage h2{
+    text-align:center;
+}
+
 
 .hidden {
     display: none;
