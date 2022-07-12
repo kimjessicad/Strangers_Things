@@ -104,7 +104,6 @@ body{
     display:flex;
     flex-direction:row;
     margin: 10px;
-    
     padding: 4px;
     margin-bottom: 12px;
 }
@@ -134,9 +133,7 @@ body{
 .postLocation {
     margin-right:12px;
 }
-.post h2 {
-   
-}
+
 .message {
     font-family:sans-serif;
     display:flex;
@@ -152,6 +149,35 @@ body{
 .messageLabel {
     font-weight:bold;
 }
+
+.postForm {
+    display:flex;
+    flex-direction:row;
+    margin: 10px;
+    padding: 4px;
+    margin-bottom: 12px;
+    justify-content: center;
+}
+.postFormRight {
+    border-top:1px solid lightgray;
+    display:flex;
+    flex:1;
+    flex-direction:column;
+}
+.postFormLeft {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    width: 280px;
+    min-width: 280px;
+    border-top:1px solid lightgray;
+}
+
+.postFormSubmit{
+    display: flex;
+    justify-content: center;
+}
+
 .navbar {
     background: black;
 
@@ -180,11 +206,20 @@ body{
   }
 
 .createPostButton{
-    width:100%
+    width:100%;
+    background-color: lightgray!important;
+    color: black!important;
+    border: none!important;
+    cursor: pointer;
+
 }
 
 .cancelPostButton{
-    width: 100%
+    width: 100%;
+    background-color: lightgray!important;
+    color: black!important;
+    cursor: pointer;
+    border: none!important
 }
 
 .postTitle{
