@@ -115,6 +115,15 @@ function handleInput(event) {
                   
                 </div>
               </div>
+              {post.messages.length ?
+              post.messages.map((message)=>{
+                return (
+              <div className="message">
+                  <h4>From: {message.fromUser.username}</h4>
+                  <p>Message: {message.content}</p>
+              </div>)})
+              :null
+            }
             </>
           ) : null;
         })
