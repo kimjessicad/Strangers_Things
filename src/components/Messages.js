@@ -12,7 +12,6 @@ const Messages = ({myMessages, myUsername}) => {
         console.log(filterSetting,messageFilter)
         sentButton.current.checked=(filterSetting==="sent");
         receivedButton.current.checked=(filterSetting==="received");
-        console.log(receivedMessages, sentMessages)
     }
 
     return (
