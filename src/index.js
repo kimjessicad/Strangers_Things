@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchAllPosts } from "./api";
 import {
   Posts,
@@ -8,8 +8,7 @@ import {
   Register,
   Profile,
   PostForm,
-  NavBar,
-  SearchBar,
+  NavBar
 } from "./components";
 
 const App = () => {
@@ -38,8 +37,8 @@ const App = () => {
   console.log(searchMatches);
 
   function handleCreatePostButton(event) {
-    if(!isLoggedIn){
-      alert("You must be logged in to post.")
+    if (!isLoggedIn) {
+      alert("You must be logged in to post.");
       return null;
     }
     setCreatePost(true);

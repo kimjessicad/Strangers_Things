@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { getProfile } from "../api";
-import { Messages } from "../components"
-import { MyPosts } from "../components"
+import { Messages } from "../components";
+import { MyPosts } from "../components";
 
-const Profile = ({setNewPostCreated}) => {
-    let token = "";
-    const [myInfo, setMyInfo] = useState({})
-    const [myMessages,setMyMessages] = useState([])
-    const [myPosts, setMyPosts] = useState([])
-   
-    useEffect(()=> {
-        token = localStorage.getItem("token")
-        async function getMyInfo() {
-            const myReturnedInfo = await getProfile(token)
-            setMyInfo(myReturnedInfo)
-            setMyMessages(myReturnedInfo.messages)
-            setMyPosts(myReturnedInfo.posts)
-            console.log(myReturnedInfo)
-        }
-        getMyInfo()
-    },[])
+const Profile = ({ setNewPostCreated }) => {
+  let token = "";
+  const [myInfo, setMyInfo] = useState({});
+  const [myMessages, setMyMessages] = useState([]);
+  const [myPosts, setMyPosts] = useState([]);
 
-    return (
-        <div>
-          <h2>{myInfo.username}'s Profile</h2>
-          <Messages myMessages={myMessages} />
-          <MyPosts myPosts={myPosts} setNewPostCreated={setNewPostCreated} />
+  useEffect(() => {
+    token = localStorage.getItem("token");
+    async function getMyInfo() {
+      const myReturnedInfo = await getProfile(token);
+      setMyInfo(myReturnedInfo);
+      setMyMessages(myReturnedInfo.messages);
+      setMyPosts(myReturnedInfo.posts);
+      console.log(myReturnedInfo);
+    }
+    getMyInfo();
+  }, []);
 
-        </div>
-    )
-}
+  return (
+    <div>
+      <h2>{myInfo.username}'s Profile</h2>
+      <Messages myMessages={myMessages} />
+      <MyPosts myPosts={myPosts} setNewPostCreated={setNewPostCreated} />
+    </div>
+  );
+};
 
-export default Profile
+export default Profile;
