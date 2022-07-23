@@ -15,7 +15,6 @@ const PostForm = ({ setNewPostCreated }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(event);
     const formObj = {
       title: event.target[0].value,
       price: event.target[1].value,

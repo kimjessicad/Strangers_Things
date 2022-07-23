@@ -1,78 +1,89 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { updatePost } from "../api";
 import { useNavigate } from "react-router";
 
-const MyPosts = ({ myPosts, setNewPostCreated }) => {
+const MyPosts = ({ myPosts, setNewPostCreated, newPostCreated }) => {
   const [showInactive, setShowInactive] = useState(false);
-  const showInactiveCheckbox = useRef();
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [userIsEditing, setUserIsEditing] = useState(false);
-  const titleInput = useRef();
-  const priceInput = useRef();
-  const descriptionInput = useRef();
-  const navigate = useNavigate();
+  const [editFields, setEditFields] = useState({})
+  const [editedAPost, setEditedAPost] = useState(false)
 
   useEffect(() => {
-    myPosts;
-  }, [userIsEditing, selectedPostId]);
+    setEditedAPost(false)
+  }, [userIsEditing, selectedPostId, editedAPost]);
 
   function handleDetailButton(event) {
     setSelectedPostId(event.target.value);
   }
-  function handleShowInactive(event) {
-    setShowInactive(showInactive ? false : true);
-    event.target.checked = !showInactive;
+  function handleShowInactive() {
+    setShowInactive(!showInactive);
+    
   }
 
-  function handleEditButton(event) {
+  function handleEditButton(event, post) {
+    if(!userIsEditing) { 
+      setEditFields({
+        title : post.title, 
+        price : post.price,
+        description : post.description
+      })
+
+    }
     setUserIsEditing(true);
+
+  }
+  function handleTitleInput(event){
+    setEditFields({
+      ...editFields,
+      title: event.target.value
+    })
+  }
+  function handlePriceInput(event){
+    setEditFields({
+      ...editFields,
+      price: event.target.value
+    })
+  }
+  function handleDescriptionInput(event){
+    setEditFields({
+      ...editFields,
+      description: event.target.value
+    })
   }
 
-  function handleCloseDetailsButton(event) {
+  function handleCloseDetailsButton() {
     setSelectedPostId("");
     setUserIsEditing(false);
   }
 
-  function handleSubmitChangesButton(event) {
-    const newTitle = titleInput.current.value;
-    const newPrice = priceInput.current.value;
-    const newDescription = descriptionInput.current.value;
-    const postObj = {
-      title: newTitle,
-      price: newPrice,
-      description: newDescription,
-    };
-    console.log(postObj);
-    console.log(event);
-
-    const result = updatePost(event.target.value, postObj);
-    if (result) setNewPostCreated(true);
-    setUserIsEditing(false);
-    navigate("/");
-    setTimeout(() => navigate("/profile"), 1); //this is a pretty weak solution to get the post to re-render.
+  function handleSubmitChangesButton(event){
+    //button has an assigned value equal to post.id
+    const result = updatePost(event.target.value, editFields);
+    if (result) {
+      setNewPostCreated(true);
+      setUserIsEditing(false);
+      setEditedAPost(true);
+    }
   }
-
-  function handleInput(event) {
-    console.log(event);
-  }
+ 
 
   return (
     <div className="profilePosts">
       <h3 className="profileSectionTitle">My posts</h3>
 
       <input
-        ref={showInactiveCheckbox}
         type="checkbox"
-        onClick={handleShowInactive}
+        onChange={handleShowInactive}
+        checked={showInactive}
+        
       />
       <label>Show Inactive Posts</label>
       {myPosts.length ? (
         myPosts.map((post) => {
           return showInactive || post.active ? (
-            <>
-              <div
-                key={`myPost${post._id}`}
-                className={post._id === selectedPostId ? "hidden" : "myPost"}
+            <div key={`myPost${post._id}`}>
+              <div className={post._id === selectedPostId ? "hidden" : "myPost"}
               >
                 <h2>{post.title}</h2>
                 <h4>{post.messages.length} Messages</h4>
@@ -91,25 +102,25 @@ const MyPosts = ({ myPosts, setNewPostCreated }) => {
                       <>
                         <label>Title</label>
                         <input
-                          ref={titleInput}
-                          defaultValue={post.title}
+                          defaultValue = {post.value}
+                          value = {editFields.title}
                           className="editFormTitleInput"
-                          onChange={handleInput}
+                          onChange={handleTitleInput}
                         ></input>
                       </>
                       <label>Price</label>
                       <input
-                        ref={priceInput}
-                        defaultValue={post.price}
+                        value = {editFields.price}
                         className="editFormPriceInput"
+                        onChange={handlePriceInput}
                       ></input>
                     </div>
                     <div className="postFormRight">
                       <label>Description</label>
                       <input
-                        ref={descriptionInput}
-                        defaultValue={post.description}
+                        value={editFields.description}
                         className="editFormDescriptionInput"
+                        onChange={handleDescriptionInput}
                       ></input>
                       <button
                         value={post._id}
@@ -141,7 +152,9 @@ const MyPosts = ({ myPosts, setNewPostCreated }) => {
                       <p className="postLocation">{post.location}</p>
                       {post.willDeliver ? <p> ✅ Will deliver </p> : null}
                     </div>
-                    <button onClick={handleEditButton}>Edit</button>
+                    <button 
+                        onClick={event => handleEditButton(event,post)}
+                        value = {post}>Edit</button>
                   </div>
                 )}
               </div>
@@ -149,14 +162,14 @@ const MyPosts = ({ myPosts, setNewPostCreated }) => {
               {(post.messages.length && post._id === selectedPostId) 
                 ? post.messages.map((message) => {
                     return (
-                      <div className="message">
+                      <div className="message" key ={message._id}>
                         <h4>From: {message.fromUser.username}</h4>
                         <p>Message: {message.content}</p>
                       </div>
                     );
                   })
                 : null}
-            </>
+            </div>
           ) : null;
         })
       ) : (

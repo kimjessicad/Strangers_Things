@@ -9,9 +9,9 @@ const Posts = (props) => {
   const posts = props.posts.data;
   const { isLoggedIn, activeSearch, setActiveSearch, searchMatches } = props;
   
-  useEffect(() => {
-    console.log("useEffect ran in Posts");
-  }, []);
+  // useEffect(() => {
+  //   console.log("useEffect ran in Posts");
+  // }, []);
 
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -36,7 +36,7 @@ const Posts = (props) => {
                   {e.title ? e.title : "untitled post"}
                 </p>
                 <h3 className="postPrice">{e.price}</h3>
-                <p classname="postSeller">{`Seller: ${e.author.username}`}</p>
+                <p className="postSeller">{`Seller: ${e.author.username}`}</p>
               </div>
               <div className="postRightSide">
                 <span className="postDescription">{e.description}</span>
@@ -72,7 +72,7 @@ const Posts = (props) => {
                   {e.title ? e.title : "untitled post"}
                 </p>
                 <h3 className="postPrice">{e.price}</h3>
-                <p classname="postSeller">{`Seller: ${e.author.username}`}</p>
+                <p className="postSeller">{`Seller: ${e.author.username}`}</p>
               </div>
               <div className="postRightSide">
                 <p className="postDescription">{e.description}</p>

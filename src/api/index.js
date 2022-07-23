@@ -113,12 +113,13 @@ export async function createNewPost(postObj, token) {
           willDeliver: postObj.willDeliver,
         },
       }),
-    });
+    });  
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.error(error);
   }
-  const result = await response.json();
-  return result;
+
 }
 
 export const deletePost = async (token, postID) => {
@@ -163,7 +164,6 @@ export const sendNewMessage = async (message, postId, token) => {
 
 export const updatePost = async (postId, postObj) => {
   try {
-    console.log(postObj,postId)
     const response = fetch(`${BASE_URL}/API/${COHORT_NAME}/posts/${postId}`, {
       method: "PATCH",
       headers: {

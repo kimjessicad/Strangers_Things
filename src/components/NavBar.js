@@ -12,7 +12,6 @@ const NavBar = ({
   let navigate = useNavigate();
 
   function handleClickHome() {
-    console.log(posts, "POSTS!#%@#%@#%#%@#%@#%@");
     navigate("/");
   }
   function handleClickProfile() {

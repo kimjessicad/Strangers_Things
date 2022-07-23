@@ -34,7 +34,7 @@ const App = () => {
     setNewPostCreated(false);
     setPosts(fetchPosts());
   }, [isLoggedIn, newPostCreated, activeSearch]);
-  console.log(searchMatches);
+
 
   function handleCreatePostButton(event) {
     if (!isLoggedIn) {
@@ -66,6 +66,7 @@ const App = () => {
                     <Profile
                       user={user}
                       setNewPostCreated={setNewPostCreated}
+                      newPostCreated={newPostCreated}
                     />
                   ) : null}
                 </Fragment>

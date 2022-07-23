@@ -3,7 +3,7 @@ import { getProfile } from "../api";
 import { Messages } from "../components";
 import { MyPosts } from "../components";
 
-const Profile = ({ setNewPostCreated }) => {
+const Profile = ({ setNewPostCreated, newPostCreated }) => {
   let token = "";
   const [myInfo, setMyInfo] = useState({});
   const [myMessages, setMyMessages] = useState([]);
@@ -16,7 +16,6 @@ const Profile = ({ setNewPostCreated }) => {
       setMyInfo(myReturnedInfo);
       setMyMessages(myReturnedInfo.messages);
       setMyPosts(myReturnedInfo.posts);
-      console.log(myReturnedInfo);
     }
     getMyInfo();
   }, []);
@@ -25,7 +24,10 @@ const Profile = ({ setNewPostCreated }) => {
     <div>
       <h2>{myInfo.username}'s Profile</h2>
       <Messages myMessages={myMessages} />
-      <MyPosts myPosts={myPosts} setNewPostCreated={setNewPostCreated} />
+      <MyPosts 
+        myPosts={myPosts}
+        setNewPostCreated={setNewPostCreated}
+        newPostCreated={newPostCreated} />
     </div>
   );
 };
